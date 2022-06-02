@@ -67,7 +67,7 @@ async function main(network) {
   );
   await communityProxy.deployed();
 
-  console.log("Community Proxy deployed at: ", comunityImpl.address);
+  console.log("Community Proxy deployed at: ", communityProxy.address);
   const COMMUNITY_ADDRESS = communityProxy.address;
 
   const community = await ethers.getContractAt(
@@ -95,7 +95,7 @@ async function main(network) {
   );
   await verificationProxy.deployed();
 
-  console.log("Community Proxy deployed at: ", comunityImpl.address);
+  console.log("Community Proxy deployed at: ", verificationProxy.address);
   const VERIFICATION_ADDRESS = verificationProxy.address;
 
   const verification = await ethers.getContractAt(
