@@ -20,7 +20,7 @@ interface IFibboVerification {
     function checkIfVerified(address) external view returns (bool);
 }
 
-contract FibboMarketplace is Ownable, ReentrancyGuard {
+contract FibboMarketplace is OwnableUpgradeable, ReentrancyGuardUpgradeable {
     //using AddressUpgradeable for address payable;
 
     event ItemListed(
@@ -78,9 +78,15 @@ contract FibboMarketplace is Ownable, ReentrancyGuard {
         public offers;
 
     /// @notice Contract initializer
-    constructor(address payable _feeRecipient, uint16 _platformFee) {
+    function initialize(address payable _feeRecipient, uint16 _platformFee)
+        public
+        initializer
+    {
         platformFee = _platformFee;
         feeReceipient = _feeRecipient;
+
+        __Ownable_init();
+        __ReentrancyGuard_init();
     }
 
     modifier isListed(

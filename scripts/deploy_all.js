@@ -147,6 +147,8 @@ async function main(network) {
   console.log("AddressRegistry proxy initalized");
 
   await defaultCollection.updateFibboVerification(VERIFICATION_ADDRESS);
+  await marketplace.updateFibboVerification(VERIFICATION_ADDRESS);
+  await community.updateFibboVerification(VERIFICATION_ADDRESS);
   await marketplace.updateAddressRegistry(ADDRESS_REGISTRY);
 
   await addressRegistry.updateFibboCollection(defaultCollection.address);
