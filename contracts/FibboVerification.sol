@@ -18,6 +18,12 @@ contract FibboVerification is OwnableUpgradeable {
         _;
     }
 
+    modifier isVerified(address _address) {
+        bool verified = verifiedArtists[_address];
+        require(verified, "This address is not verified!");
+        _;
+    }
+
     function verificateAddress(address _toVerificate)
         external
         isNotVerified(_toVerificate)
@@ -32,7 +38,7 @@ contract FibboVerification is OwnableUpgradeable {
 
     function unverifyAddress(address _toVerificate)
         external
-        isNotVerified(_toVerificate)
+        isVerified(_toVerificate)
         onlyOwner
     {
         delete verifiedArtists[_toVerificate];
