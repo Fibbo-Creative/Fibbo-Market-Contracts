@@ -12,6 +12,9 @@ contract FibboAddressRegistry is OwnableUpgradeable {
     /// @notice Fibbo default Collection contract
     address public fibboCollection;
 
+    /// @notice Fibbo Utility Collection contract
+    address public utilityCollection;
+
     /// @notice FibboMarketplace contract
     address public marketplace;
 
@@ -39,6 +42,21 @@ contract FibboAddressRegistry is OwnableUpgradeable {
             "Not ERC721"
         );
         fibboCollection = _fibboCollection;
+    }
+
+    /** 
+     @notice Update Fibbo default collection contract
+     @dev Only admin
+     */
+    function updateUtilityCollection(address _utilityCollection)
+        external
+        onlyOwner
+    {
+        require(
+            IERC165(_utilityCollection).supportsInterface(INTERFACE_ID_ERC721),
+            "Not ERC721"
+        );
+        utilityCollection = _utilityCollection;
     }
 
     /**

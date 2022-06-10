@@ -113,6 +113,11 @@ async function main(network) {
   const defaultCollection = await DefaultCollection.deploy(MARKETPLACE_ADDRESS);
   await defaultCollection.deployed();
   console.log("DefaultCollection deploted to: ", defaultCollection.address);
+
+  const UtilityCollection = await ethers.getContractFactory("UtilityFibbo");
+  const utilityCollection = await UtilityCollection.deploy(MARKETPLACE_ADDRESS);
+  await utilityCollection.deployed();
+  console.log("UtilityCollection deploted to: ", utilityCollection.address);
   ////
 
   //// AddressRegistry deployement
@@ -147,6 +152,8 @@ async function main(network) {
   console.log("AddressRegistry proxy initalized");
 
   await defaultCollection.updateFibboVerification(VERIFICATION_ADDRESS);
+  await utilityCollection.updateFibboVerification(VERIFICATION_ADDRESS);
+
   await marketplace.updateFibboVerification(VERIFICATION_ADDRESS);
   await community.updateFibboVerification(VERIFICATION_ADDRESS);
   await marketplace.updateAddressRegistry(ADDRESS_REGISTRY);

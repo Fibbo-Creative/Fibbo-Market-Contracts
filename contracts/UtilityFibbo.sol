@@ -10,10 +10,13 @@ interface IFibboVerification {
     function checkIfVerified(address) external view returns (bool);
 }
 
-contract DefaultFibbo is ERC721URIStorage, Ownable {
+contract UtilityFibbo is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter public _tokenIds;
     address contractAddress;
+
+    /// @notice Hidden Content on NFTS
+    mapping(uint256 => string) hiddenContents;
 
     /// @notice Fibbo Address Verfification
     IFibboVerification public fibboVerification;
@@ -25,12 +28,12 @@ contract DefaultFibbo is ERC721URIStorage, Ownable {
     }
 
     constructor(address marketplaceAddress)
-        ERC721("Fibbo Default Collection", "FBODEF")
+        ERC721("Utility Collection", "FBOUTI")
     {
         contractAddress = marketplaceAddress;
     }
 
-    function createToken(string memory tokenURI)
+    function createToken(string memory tokenURI, string memory _hiddenContent)
         public
         isVerifiedAddress(msg.sender)
         returns (uint256)
@@ -42,6 +45,7 @@ contract DefaultFibbo is ERC721URIStorage, Ownable {
         _setTokenURI(newItemId, tokenURI);
         setApprovalForAll(contractAddress, true);
 
+        hiddenContents[newItemId] = _hiddenContent;
         return newItemId;
     }
 
