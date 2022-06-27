@@ -12,18 +12,17 @@ async function main(network) {
     "FibboAddressRegistry",
     ADDRESS_REGISTRY
   );
-  console.log(await addressRegistry.fibboCollection());
 
-  /*   const verificationAddress = await addressRegistry.verification();
+  const verificationAddress = await addressRegistry.verification();
 
   const verification = await ethers.getContractAt(
     "FibboVerification",
     verificationAddress
   );
 
-  await verification.verificateAddress(
-    "0x06b3cC29D74a36f15F1B2beD529Fe45E30CAaf12"
-  ); */
+  await verification.verificateInversor(
+    "0xA2556b37930fA3e5a21C8D2dbbfe4b798ACA7d32"
+  );
 }
 
 main(network)

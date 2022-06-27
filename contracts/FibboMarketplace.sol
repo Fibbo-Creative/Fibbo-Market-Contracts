@@ -18,6 +18,8 @@ interface IFibboAddressRegistry {
 
 interface IFibboVerification {
     function checkIfVerified(address) external view returns (bool);
+
+    function checkIfVerifiedInversor(address) external view returns (bool);
 }
 
 contract FibboMarketplace is OwnableUpgradeable, ReentrancyGuardUpgradeable {
@@ -101,7 +103,13 @@ contract FibboMarketplace is OwnableUpgradeable, ReentrancyGuardUpgradeable {
 
     modifier isVerifiedAddress(address _address) {
         bool isValidAddress = fibboVerification.checkIfVerified(_address);
-        require(isValidAddress, "Address is not verified");
+        if (!isValidAddress) {
+            bool isValidInversor = fibboVerification.checkIfVerifiedInversor(
+                _address
+            );
+            require(isValidInversor, "Address is not verified");
+        }
+
         _;
     }
 
