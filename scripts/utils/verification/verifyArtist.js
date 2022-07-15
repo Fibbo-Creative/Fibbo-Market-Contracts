@@ -21,7 +21,7 @@ async function main(network) {
   );
 
   await verification.verificateInversor(
-    "0xA2556b37930fA3e5a21C8D2dbbfe4b798ACA7d32"
+    "0x985957b55D06057D0Cb59640D52C6F9f1521D3FE"
   );
 }
 
